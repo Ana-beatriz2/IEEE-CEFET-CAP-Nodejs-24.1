@@ -1,0 +1,9 @@
+Falar rapidamente que vamos fazer um crud e falar o que é
+
+O que é node e por que usar?
+
+API x API rest 
+
+Mostrar e falar sobre workbench - sgbd. Pesquisar tutorial
+
+npm
