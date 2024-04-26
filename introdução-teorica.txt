@@ -4,6 +4,10 @@ O que é node e por que usar?
 
 API x API rest 
 
+
+
 Mostrar e falar sobre workbench - sgbd. Pesquisar tutorial
 
-npm
+npm x npx x yarn
+
+npx knex migrate:latest
