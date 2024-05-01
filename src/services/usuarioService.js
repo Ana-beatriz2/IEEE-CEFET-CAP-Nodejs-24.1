@@ -16,16 +16,10 @@ async function createUsuarioService(nome, email, password, telefone){
 
         await knex("usuario").insert(novoUsuario);
 
-        return {
-            status: true,
-            message: "Usuario cadastrado"
-        };
+        return "Usuário cadastrado";
 
     }catch(erro){
-        return {
-            status: false,
-            message: erro.message
-        };
+        throw erro
     }
 }
 
@@ -37,13 +31,10 @@ async function readUsuarioService(){
             throw new Error("Sem usuários");
         }
 
-        return {
-            status: true,
-            usuarios: usuarios
-        };
+        return usuarios;
         
     }catch(erro){
-        return erro.message;
+        throw erro
     }
 }
 
@@ -55,16 +46,10 @@ async function readUsuarioPorIdService(id){
             throw new Error("Não encontrado");
         }
 
-        return {
-            status: true,
-            usuario: usuario
-        };
+        return usuario;
         
     }catch(erro){
-        return {
-            status: false,
-            usuario: erro.message
-        };
+        throw erro
     }
 }
 

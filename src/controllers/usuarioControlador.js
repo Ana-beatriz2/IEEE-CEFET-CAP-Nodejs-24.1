@@ -6,14 +6,11 @@ async function createUsuario(req, res){
         const {nome, email, password, telefone} = req.body;
         const createService = await createUsuarioService(nome, email, password, telefone);
 
-        res.json(createService);
+        res.json({ status: true, message: createService});
 
     }catch(erro){
         console.log(erro);
-        res.json({
-            status: false, 
-            message: erro.message
-        });
+        res.json({ status: false, message: erro.message });
     }
 }
 
@@ -21,14 +18,11 @@ async function readUsuario(req, res){
     try{
         const readService = await readUsuarioService();
 
-        res.json(readService);
+        res.json({ status: true, usuarios: readService });
 
     }catch(erro){
         console.log(erro);
-        res.json({
-            status: false, 
-            message: erro.message
-        });
+        res.json({ status: false, message: erro.message });
     }
 }
 
@@ -37,14 +31,11 @@ async function readUsuarioPorId(req, res){
         const id_usuario = req.params.id;
         const readIdService = await readUsuarioPorIdService(id_usuario);
 
-        res.json(readIdService);
+        res.json({ status: true, usuario: readIdService });
 
     }catch(erro){
         console.log(erro);
-        res.json({
-            status: false, 
-            message: erro.message
-        });
+        res.json({ status: false, message: erro.message });
     }
 }
 
