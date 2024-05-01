@@ -5,7 +5,7 @@ exports.up = function(knex) {
     table.string('nome').notNullable();
     table.string('email').notNullable().unique();
     table.string('password').notNullable();
-    table.string('telefone');
+    table.string('telefone'); //colocar como unique também
   })
 };
 
