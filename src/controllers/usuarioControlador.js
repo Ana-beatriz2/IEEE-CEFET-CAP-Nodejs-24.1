@@ -1,5 +1,5 @@
 const {request = req, response = res} = require("express");
-const { createUsuarioService, readUsuarioService, readUsuarioPorIdService, updateUsuarioService } = require("../services/usuarioService");
+const { createUsuarioService, readUsuarioService, readUsuarioPorIdService, updateUsuarioService, deleteUsuarioService } = require("../services/usuarioService");
 
 async function createUsuario(req, res){
     try{
@@ -53,9 +53,23 @@ async function updateUsuario(req, res){
     }
 }
 
+async function deleteUsuario(req, res){
+    try{
+        const id_usuario = req.params.id;
+        const deleteService = await deleteUsuarioService(id_usuario);
+
+        res.json({ status: true, message: deleteService });
+
+    }catch(erro){
+        console.log(erro);
+        res.json({ status: false, message: erro.message });
+    }
+} 
+
 module.exports = {
     createUsuario,
     readUsuario,
     readUsuarioPorId,
-    updateUsuario
+    updateUsuario,
+    deleteUsuario
 }

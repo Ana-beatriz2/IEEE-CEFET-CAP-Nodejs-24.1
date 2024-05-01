@@ -83,9 +83,26 @@ async function updateUsuarioService(id, nome, email, password, telefone){
       }
 }
 
+async function deleteUsuarioService(id){
+    try{
+        const usuario = await knex('usuario').select('*').where({id: id}).first();
+        if (!usuario) {
+            throw new Error("Usuário não existe");
+        }
+    
+        await knex("usuario").delete().where({id: id});
+
+        return "Usuário deletado";
+        
+    }catch(erro){
+        throw erro
+    }
+}
+
 module.exports = {
     createUsuarioService,
     readUsuarioService,
     readUsuarioPorIdService,
-    updateUsuarioService
+    updateUsuarioService,
+    deleteUsuarioService
 }
