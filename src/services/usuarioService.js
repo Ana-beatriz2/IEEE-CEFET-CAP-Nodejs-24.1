@@ -53,8 +53,35 @@ async function readUsuarioPorIdService(id){
     }
 }
 
+async function updateUsuarioService(id, nome, email, password, telefone){
+    try{
+        if(readUsuarioPorIdService(id)){
+            const novoUsuario = {
+                nome: nome,
+                email: email,
+                telefone: telefone 
+            };
+    
+            //Criptografa senha
+            if(password){
+                const salt = bcrypt.genSaltSync();
+                const hash = bcrypt.hashSync(password, salt);
+                novoUsuario.password = hash;
+            }
+    
+            await knex("usuario").update(novoUsuario).where({id: id});
+    
+            return "Usuário atualizado";
+        }
+
+    }catch(erro){
+        throw erro
+    }
+}
+
 module.exports = {
     createUsuarioService,
     readUsuarioService,
-    readUsuarioPorIdService
+    readUsuarioPorIdService,
+    updateUsuarioService
 }

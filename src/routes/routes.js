@@ -1,13 +1,13 @@
 const Router = require("express").Router;
 const route = Router();
 
-const { createUsuario, readUsuario, readUsuarioPorId } = require("../controllers/usuarioControlador");
+const { createUsuario, readUsuario, readUsuarioPorId, updateUsuario } = require("../controllers/usuarioControlador");
 
 //ROTAS PADRÃO - CRUD
 route.post("/create", createUsuario);
 route.get("/read", readUsuario);
 route.get("/read/:id", readUsuarioPorId);
-route.patch("/update/:id", );
+route.patch("/update/:id", updateUsuario);
 route.delete("/delete", );
 
 //LOGIN
