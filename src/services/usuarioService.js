@@ -54,29 +54,33 @@ async function readUsuarioPorIdService(id){
 }
 
 async function updateUsuarioService(id, nome, email, password, telefone){
-    try{
-        if(readUsuarioPorIdService(id)){
-            const novoUsuario = {
-                nome: nome,
-                email: email,
-                telefone: telefone 
-            };
-    
-            //Criptografa senha
-            if(password){
-                const salt = bcrypt.genSaltSync();
-                const hash = bcrypt.hashSync(password, salt);
-                novoUsuario.password = hash;
-            }
-    
-            await knex("usuario").update(novoUsuario).where({id: id});
-    
-            return "Usuário atualizado";
+    try {
+        const usuario = await knex('usuario').select('*').where({id: id}).first();
+        if (!usuario) {
+            throw new Error("Usuário não existe");
         }
+        
+        // Criptografa a senha (se fornecida)
+        let hash;
+        if (password) {
+            const salt = bcrypt.genSaltSync();
+            hash = bcrypt.hashSync(password, salt);
+        }
+        
+        const novoUsuario = {
+            nome: nome,
+            email: email,
+            password: hash,
+            telefone: telefone 
+        };
 
-    }catch(erro){
-        throw erro
-    }
+        await knex('usuario').update(novoUsuario).where({ id: id });
+
+        return "Usuário atualizado";
+    
+      }catch(erro){
+        throw eroo;
+      }
 }
 
 module.exports = {
