@@ -1,8 +1,10 @@
 const Router = require("express").Router;
 const route = Router();
 
+const { createUsuario } = require("../controllers/usuarioControlador");
+
 //ROTAS PADRÃO - CRUD
-route.post("/create", );
+route.post("/create", createUsuario);
 route.get("/read", );
 route.get("/read/:id", );
 route.patch("/update/:id", );
