@@ -1,10 +1,9 @@
-const {request = req, response = res} = require("express");
-const { createUsuarioService, readUsuarioService, readUsuarioPorIdService, updateUsuarioService, deleteUsuarioService } = require("../services/usuarioService");
+const usuarioService = require("../services/usuarioService");
 
 async function createUsuario(req, res){
     try{
         const {nome, email, password, telefone} = req.body;
-        const createService = await createUsuarioService(nome, email, password, telefone);
+        const createService = await usuarioService.createUsuario(nome, email, password, telefone);
 
         res.json({ status: true, message: createService});
 
@@ -16,7 +15,7 @@ async function createUsuario(req, res){
 
 async function readUsuario(req, res){
     try{
-        const readService = await readUsuarioService();
+        const readService = await usuarioService.readUsuario();
 
         res.json({ status: true, usuarios: readService });
 
@@ -29,7 +28,7 @@ async function readUsuario(req, res){
 async function readUsuarioPorId(req, res){
     try{
         const id_usuario = req.params.id;
-        const readIdService = await readUsuarioPorIdService(id_usuario);
+        const readIdService = await usuarioService.readUsuarioPorId(id_usuario);
 
         res.json({ status: true, usuario: readIdService });
 
@@ -43,7 +42,7 @@ async function updateUsuario(req, res){
     try{
         const id_usuario = req.params.id;
         const {nome, email, password, telefone} = req.body;
-        const updateService = await updateUsuarioService(id_usuario, nome, email, password, telefone);
+        const updateService = await usuarioService.updateUsuario(id_usuario, nome, email, password, telefone);
 
         res.json({ status: true, usuario: updateService });
 
@@ -56,7 +55,7 @@ async function updateUsuario(req, res){
 async function deleteUsuario(req, res){
     try{
         const id_usuario = req.params.id;
-        const deleteService = await deleteUsuarioService(id_usuario);
+        const deleteService = await usuarioService.deleteUsuario(id_usuario);
 
         res.json({ status: true, message: deleteService });
 

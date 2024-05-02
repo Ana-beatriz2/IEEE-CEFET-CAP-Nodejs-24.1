@@ -1,7 +1,7 @@
 const knex = require("../database/index");
 const bcrypt = require("bcrypt")
 
-async function createUsuarioService(nome, email, password, telefone){
+async function createUsuario(nome, email, password, telefone){
     try{
         //Criptografa senha
         const salt = bcrypt.genSaltSync();
@@ -23,11 +23,11 @@ async function createUsuarioService(nome, email, password, telefone){
     }
 }
 
-async function readUsuarioService(){
+async function readUsuario(){
     try{
         const usuarios = await knex("usuario").select("*");
 
-        if(!usuarios){
+        if(usuarios.length === 0){
             throw new Error("Sem usuários");
         }
 
@@ -38,7 +38,7 @@ async function readUsuarioService(){
     }
 }
 
-async function readUsuarioPorIdService(id){
+async function readUsuarioPorId(id){
     try{
         const usuario = await knex("usuario").select("*").where({id: id}).first();
         
@@ -53,7 +53,7 @@ async function readUsuarioPorIdService(id){
     }
 }
 
-async function updateUsuarioService(id, nome, email, password, telefone){
+async function updateUsuario(id, nome, email, password, telefone){
     try {
         const usuario = await knex('usuario').select('*').where({id: id}).first();
         if (!usuario) {
@@ -83,14 +83,14 @@ async function updateUsuarioService(id, nome, email, password, telefone){
       }
 }
 
-async function deleteUsuarioService(id){
+async function deleteUsuario(id){
     try{
         const usuario = await knex('usuario').select('*').where({id: id}).first();
         if (!usuario) {
             throw new Error("Usuário não existe");
         }
     
-        await knex("usuario").delete().where({id: id});
+        await knex("usuario").delete();
 
         return "Usuário deletado";
         
@@ -100,9 +100,9 @@ async function deleteUsuarioService(id){
 }
 
 module.exports = {
-    createUsuarioService,
-    readUsuarioService,
-    readUsuarioPorIdService,
-    updateUsuarioService,
-    deleteUsuarioService
+    createUsuario,
+    readUsuario,
+    readUsuarioPorId,
+    updateUsuario,
+    deleteUsuario
 }
