@@ -79,7 +79,7 @@ async function updateUsuarioService(id, nome, email, password, telefone){
         return "Usuário atualizado";
     
       }catch(erro){
-        throw eroo;
+        throw erro;
       }
 }
 
