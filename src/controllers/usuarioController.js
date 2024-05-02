@@ -28,6 +28,8 @@ async function readUsuario(req, res){
 async function readUsuarioPorId(req, res){
     try{
         const id_usuario = req.params.id;
+        //const id_usuario = req.usuario.id;
+
         const readIdService = await usuarioService.readUsuarioPorId(id_usuario);
 
         res.json({ status: true, usuario: readIdService });
@@ -40,7 +42,9 @@ async function readUsuarioPorId(req, res){
 
 async function updateUsuario(req, res){
     try{
+        //const id_usuario = req.usuario.id;
         const id_usuario = req.params.id;
+
         const {nome, email, password, telefone} = req.body;
         const updateService = await usuarioService.updateUsuario(id_usuario, nome, email, password, telefone);
 
@@ -54,7 +58,9 @@ async function updateUsuario(req, res){
 
 async function deleteUsuario(req, res){
     try{
+        //const id_usuario = req.usuario.id;
         const id_usuario = req.params.id;
+
         const deleteService = await usuarioService.deleteUsuario(id_usuario);
 
         res.json({ status: true, message: deleteService });
