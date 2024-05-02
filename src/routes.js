@@ -10,7 +10,7 @@ route.patch("/usuario/:id", usuarioController.updateUsuario);
 route.delete("/usuario/:id", usuarioController.deleteUsuario);
 
 //LOGIN
-route.post("/login", )
+route.post("/login", usuarioController.login)
 
 //ROTA DEFAULT
 route.get("/", (req, res)=>{

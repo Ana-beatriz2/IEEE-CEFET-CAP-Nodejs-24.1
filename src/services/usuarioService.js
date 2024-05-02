@@ -1,5 +1,7 @@
+require("dotenv").config()
 const knex = require("../database/index");
-const bcrypt = require("bcrypt")
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 async function createUsuario(nome, email, password, telefone){
     try{
@@ -19,7 +21,7 @@ async function createUsuario(nome, email, password, telefone){
         return "Usuário cadastrado";
 
     }catch(erro){
-        throw erro
+        throw erro;
     }
 }
 
@@ -34,7 +36,7 @@ async function readUsuario(){
         return usuarios;
         
     }catch(erro){
-        throw erro
+        throw erro;
     }
 }
 
@@ -49,7 +51,7 @@ async function readUsuarioPorId(id){
         return usuario;
         
     }catch(erro){
-        throw erro
+        throw erro;
     }
 }
 
@@ -90,12 +92,39 @@ async function deleteUsuario(id){
             throw new Error("Usuário não existe");
         }
     
-        await knex("usuario").delete();
+        await knex("usuario").delete().where({id: id});
 
         return "Usuário deletado";
         
     }catch(erro){
-        throw erro
+        throw erro;
+    }
+}
+
+async function login(email, password){
+    try{
+        const usuario = await knex("usuario").select("*").where({email : email}).first();
+        if(!usuario){
+            throw new Error("Usuário não existe");
+        }
+
+        const comparePassword = bcrypt.compareSync(password, usuario.password);
+        if(!comparePassword){
+            throw new Error("Senha incorreta");
+        }
+
+        const informcoesUsuario = {
+            id: usuario.id,
+            nome: usuario.nome,
+            email: usuario.email,
+            telefone: usuario.telefone
+        }
+
+        const token = jwt.sign(informcoesUsuario, process.env.JWT_KEY, {expiresIn:'24h'});
+        return token
+
+    }catch(erro){
+        throw erro;
     }
 }
 
@@ -104,5 +133,6 @@ module.exports = {
     readUsuario,
     readUsuarioPorId,
     updateUsuario,
-    deleteUsuario
+    deleteUsuario,
+    login
 }

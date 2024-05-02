@@ -65,10 +65,24 @@ async function deleteUsuario(req, res){
     }
 } 
 
+async function login(req, res){
+    try{
+        const {email, password} = req.body;
+        const token = await usuarioService.login(email, password);
+
+        res.json({status: true, token:token});
+
+    }catch(erro){
+        console.log(erro);
+        res.json({ status: false, message: erro.message });
+    }
+}
+
 module.exports = {
     createUsuario,
     readUsuario,
     readUsuarioPorId,
     updateUsuario,
-    deleteUsuario
+    deleteUsuario,
+    login
 }
