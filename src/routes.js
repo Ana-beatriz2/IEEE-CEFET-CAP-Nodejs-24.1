@@ -1,6 +1,7 @@
 const Router = require("express").Router;
 const route = Router();
 const usuarioController = require("./controllers/usuarioController");
+const { auth } = require("./middleware/auth")
 
 //ROTAS PADRÃO - CRUD
 route.post("/usuario", usuarioController.createUsuario);
