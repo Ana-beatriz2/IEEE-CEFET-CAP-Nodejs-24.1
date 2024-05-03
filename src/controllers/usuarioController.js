@@ -76,7 +76,7 @@ async function login(req, res){
         const {email, password} = req.body;
         const token = await usuarioService.login(email, password);
 
-        res.json({status: true, token:token});
+        res.json({status: true, token: token});
 
     }catch(erro){
         console.log(erro);

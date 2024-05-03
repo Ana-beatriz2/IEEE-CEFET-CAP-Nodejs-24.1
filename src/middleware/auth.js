@@ -14,7 +14,6 @@ async function auth(req, res, next){
         jwt.verify(token, process.env.JWT_KEY, (erro, decoded) => {
 
             if(erro){
-                console.log(erro)
                 throw new Error("Token inválido: "+ erro.message);
             }
             else{

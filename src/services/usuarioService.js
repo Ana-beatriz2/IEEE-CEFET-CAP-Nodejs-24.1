@@ -1,4 +1,4 @@
-require("dotenv").config()
+require("dotenv").config();
 const knex = require("../database/index");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
@@ -108,7 +108,8 @@ async function login(email, password){
             throw new Error("Usuário não existe");
         }
 
-        const comparePassword = bcrypt.compareSync(password, usuario.password);
+        //o hash da senha pssada é igual ao hash guardado?
+        const comparePassword = bcrypt.compareSync(password, usuario.password); 
         if(!comparePassword){
             throw new Error("Senha incorreta");
         }
@@ -121,7 +122,7 @@ async function login(email, password){
         }
 
         const token = jwt.sign(informcoesUsuario, process.env.JWT_KEY, {expiresIn:'24h'});
-        return token
+        return token;
 
     }catch(erro){
         throw erro;
