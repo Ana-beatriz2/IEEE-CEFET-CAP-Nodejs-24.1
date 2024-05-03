@@ -1,13 +1,39 @@
 Falar rapidamente que vamos fazer um crud e falar o que é
 
-O que é node e por que usar?
+O que é Node e por que usar?
 
-API x API rest 
+É um JS runtime (ambiente de execução). Com Node.js, você pode usar JavaScript tanto no lado do cliente (navegador) quanto no lado do servidor. 
+Empresas que utilizam: Netflix, Uber, LinkedLn.
 
+API x API Rest 
 
+Uma API rest é um conjunto de restrições para criação de APIs. Utiliza de forma padronizada o protocolo HTTP para criar APIs. 
+Status code, verbos, padrão para rotas. É um tipo de arquitetura. Utiliza os princípios do protocolo HTTP de forma coerente
+
+Pode fazer através de chamadas http a manipulação básica de uma aplicação (CRUD)
+
+Formato que será retornado 
+Status code 
+
+Vantagens: simples e padronizada, escalonável e stateless (cada req é independente, não será armazenada nenhuma informação dela), 
+alta performance (por estar utilizando os recursos do http e por outras pessoas que podem utilizar a api, pois já irão reconhecer o protocolo)
 
 Mostrar e falar sobre workbench - sgbd. Pesquisar tutorial
 
 npm x npx x yarn
 
-npx knex migrate:latest
+npm (Node Package Manager):
+gerenciador de pacotes padrão para o Node.js.
+Usado para instalar, gerenciar e publicar pacotes JavaScript.
+Com o npm, você pode instalar pacotes globalmente ou localmente em um projeto.
+Além disso, o npm é usado para iniciar scripts definidos no arquivo package.json de um projeto.
+
+npx:
+Ferramenta que vem com o npm a partir da versão 5.2.0.
+Ele é usado para executar pacotes Node.js diretamente do npm, sem a necessidade de instalá-los globalmente ou localmente.
+
+Yarn:
+
+Outro gerenciador de pacotes JavaScript.
+Falavam que é mais rápido e possuia funcionalidades a mais
+Hoje a velocidade do npm e do yarn estão praticamente iguais 
